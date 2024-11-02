@@ -66,39 +66,24 @@ class ChessBoard {
 }
 
 function knightMoves(start, end) {
+    try {
+        const board = new ChessBoard();
+        const path = board.findPath(start, end);
 
-    function getValidMoves(pos) {
-        const moves = [
-            [pos[0] + 2, pos[1] + 1], [pos[0] + 2, pos[1] - 1],
-            [pos[0] - 2, pos[1] + 1], [pos[0] - 2, pos[1] - 1],
-            [pos[0] + 1], [pos[1] + 2], [pos[0] + 1], [pos[1] - 2],
-            [pos[0] - 1], [pos[1] + 2], [pos[0] - 1], [pos[1] - 2]
-        ];
-
-        return moves.filter(move => 
-            move[0] >= 0 && move[0] <= 7 &&
-            move[1] >= 0 && move[1] <= 7
-        );
-    }
-
-    
-
-    while (queue.length > 0) {
-        const [currentPos, path] = queue.shift();
-
-        for (const nextPos of getValidMoves(currentPos)) {
-            const nextPosStr = nextPos.toString();
-
-            if (nextPosStr === endStr) {
-                return [...path, nextPos];
-            }
-
-            if (!visited.has(nextPosStr)) {
-                visited.add(nextPosStr);
-                queue.push([nextPos, [...path, nextPos]])
-            }
+        if (!path) {
+            return "No valid path found!";
         }
-    }
 
-    return null;
+        const moves = path.length - 1;
+        let output = `You made it in ${moves} moves! Here's your path:\n`;
+
+        path.forEach(position => {
+            output += `[${position[0]},${position[1]}]\n`;
+        });
+
+        return output;
+    } catch (error) {
+        return `Error: ${error.message}`;
+    }
 }
+
