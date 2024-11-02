@@ -1,1 +1,1 @@
-# knigh-game-odin-project
+# knight-game-odin-project

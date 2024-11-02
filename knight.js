@@ -87,3 +87,11 @@ function knightMoves(start, end) {
     }
 }
 
+// Test cases
+console.log(knightMoves([3,3], [4,3]));
+console.log(knightMoves([0,0], [7,7]));
+console.log(knightMoves([3,3], [3,3]));
+
+// Error cases
+console.log(knightMoves([8,8], [3,3])); // Position out of bounds
+console.log(knightMoves([3,3], [-1,5])); // Position out of bounds
